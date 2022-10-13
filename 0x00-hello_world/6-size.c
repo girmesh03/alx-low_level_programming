@@ -2,7 +2,9 @@
 /**
  * main - Entry poin
  * 
+ *
  * Description: rints the size of various types on the computer
+ *
  *
  * Return: 0 (On Success)
  */

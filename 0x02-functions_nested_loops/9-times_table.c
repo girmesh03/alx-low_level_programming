@@ -5,7 +5,7 @@
  * Return: void
  */
 
-int times_table(void)
+void times_table(void)
 {
 	int number;
 	int multiplier;
@@ -14,7 +14,7 @@ int times_table(void)
 	for (number = 0; number <= 9; ++number)
 	{
 		_putchar(48);
-		for (multiplier = 0; multiplier <= 9; ++multiplier)
+		for (multiplier = 1; multiplier <= 9; ++multiplier)
 		{
 			_putchar(',');
 			_putchar(' ');
@@ -30,7 +30,7 @@ int times_table(void)
 				_putchar((result / 10) + 48);
 			}
 
-			_putchar((result / 10) + 48)
+			_putchar((result % 10) + 48);
 		}
 
 		_putchar('\n');

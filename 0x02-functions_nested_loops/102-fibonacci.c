@@ -1,29 +1,24 @@
-#include "main.h"
 #include <stdio.h>
-
 /**
  * main - prints fibonacci numbers starting from 1
  * Return: On successs (0)
  */
-
 int main(void)
 {
-	int a = 1;
-	int b = 2;
-	int result;
+	long first_num = 1;
+	long second_num = 2;
 	int i;
 
-	for (i = 1; i <= 50; i++)
+	for (i = 0; i < 25; i++)
 	{
-		printf("%d", a);
-		if (i < 50)
+		if (i == 24)
 		{
-			_putchar(',');
-			_putchar(' ');
+			printf("%li, %li", first_num, second_num);
+			continue;
 		}
-		result = a + b;
-		a = b;
-		b = result;
+		printf("%li, %li, ", first_num, second_num);
+		first_num += second_num;
+		second_num += first_num;
 	}
 	printf("\n");
 	return (0);

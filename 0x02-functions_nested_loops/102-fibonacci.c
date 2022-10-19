@@ -11,9 +11,10 @@ int main(void)
 	int a = 1;
 	int b = 2;
 	int result;
+	int i;
 
-	for (int i = 1; i <= 50; i++)
-		{
+	for (i = 1; i <= 50; i++)
+	{
 		printf("%d", a);
 		if (i < 50)
 		{
@@ -23,8 +24,7 @@ int main(void)
 		result = a + b;
 		a = b;
 		b = result;
-
-		}
+	}
 	printf("\n");
 	return (0);
 }

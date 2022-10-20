@@ -15,22 +15,28 @@ int main(void)
 
 	for (loop = 1; loop <= 100; loop++)
 	{
-		if ((loop % 3 != 0) && (loop % 5 != 0))
+		if (loop % 3 == 0 && loop % 5 == 0)
 		{
-			printf("%d ", loop);
-		}
-		else if (loop % 3 == 0)
-		{
-			printf("%s ", "Fizz");
+			printf("%s", "FizzBuzz");
 		}
 		else if (loop % 5 == 0)
 		{
-			printf("%s ", "Buzz");
+			printf("%s", "Buzz");
 		}
-		else if ((loop % 3 == 0) && (loop % 5 == 0))
+		else if (loop % 3 == 0)
 		{
-			printf("%s ", "FizzBuzz");
+			printf("%s", "Fizz");
 		}
+		else
+		{
+			printf("%d", loop);
+		}
+
+		if (loop < 100)
+		{
+			printf(" ");
+		}
+
 	}
 	printf("\n");
 	return (0);

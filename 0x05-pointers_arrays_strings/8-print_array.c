@@ -14,31 +14,34 @@ void print_array(int *a, int n)
 	int i;
 	int j;
 
-	for (i = 0; i < n - 1; i++)
+	if (n > 0)
 	{
-		for (j = 0; j < n - 1; j++)
+		for (i = 0; i < n - 1; i++)
 		{
-			if (a[j + 1] > a[j])
+			for (j = 0; j < n - 1; j++)
 			{
-				int tmp = a[j];
+				if (a[j] > a[j + 1])
+				{
+					int tmp = a[j];
 
-				a[j] = a[j + 1];
-				a[j + 1] = tmp;
+					a[j] = a[j + 1];
+					a[j + 1] = tmp;
+				}
 			}
 		}
-	}
 
-	for (index = 0; index < n; index++)
-	{
-		printf("%d", *(a + index));
-
-		if (index != n - 1)
+		for (index = 0; index < n; index++)
 		{
-			printf(",");
-			printf(" ");
-		}
-	}
+			printf("%d", *(a + index));
 
-	printf("\n");
+			if (index != n - 1)
+			{
+				printf(",");
+				printf(" ");
+			}
+
+		}
+		printf("\n");
+	}
 }
 

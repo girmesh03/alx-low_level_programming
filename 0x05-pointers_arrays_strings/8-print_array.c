@@ -11,37 +11,19 @@
 void print_array(int *a, int n)
 {
 	int index;
-	int i;
-	int j;
 
-	if (n > 0)
+	for (index = 0; index < n; ++index)
 	{
-		for (i = 0; i < n - 1; i++)
+		if (index != (n - 1))
 		{
-			for (j = 0; j < n - 1; j++)
-			{
-				if (a[j] > a[j + 1])
-				{
-					int tmp = a[j];
-
-					a[j] = a[j + 1];
-					a[j + 1] = tmp;
-				}
-			}
+			printf("%d, ", a[index]);
 		}
-
-		for (index = 0; index < n; index++)
+		else
 		{
-			printf("%d", *(a + index));
-
-			if (index != n - 1)
-			{
-				printf(",");
-				printf(" ");
-			}
-
+			printf("%d", a[index]);
 		}
-		printf("\n");
 	}
+
+	printf("\n");
 }
 

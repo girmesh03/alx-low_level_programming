@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * _strncpy - Copies a strings Source to Destination up to n.
@@ -11,9 +10,18 @@
 
 char *_strncpy(char *dest, char *src, int n)
 {
-	char *r = dest;
+	int i = 0;
 
-	for (; ((n >= 0) && ((*dest++ = *src++) != '\0')); n--);
+	for (i = 0; i < n && src[i] != '\0'; i++)
+	{
+		dest[i] = src[i];
+	}
 
-	return (r);
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+
+	return (dest);
 }

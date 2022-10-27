@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * string_toupper - Lowercase letters of a string to uppercase.
@@ -9,14 +8,15 @@
 
 char *string_toupper(char *ch)
 {
-	while (*ch != '\0')
+	int i;
+
+	for (i = 0; ch[i] != '\0'; i++)
+	{
+		if ((ch[i] >= 'a') && (ch[i] <= 'z'))
 		{
-		if ((*ch >= 'a') && (*ch <= 'z'))
-			{
-			*ch = *ch - 32;
-			}
-		ch++;
+			ch[i] = ch[i] - 32;
 		}
+	}
 
 	return (ch);
 }

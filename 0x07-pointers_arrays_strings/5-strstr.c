@@ -7,20 +7,32 @@
  * Return: char or NULL
  */
 
+
 char *_strstr(char *haystack, char *needle)
 {
-	int ch = 0;
-	int index = 0;
+	int index;
 
-	for (ch = 0; needle[ch] != '\0'; ch++)
+	if (*needle == 0)
+		return (haystack);
+
+	while (*haystack)
 	{
-		for (index = 0; haystack[index] != '\0'; index++)
+		index = 0;
+
+		if (haystack[index] == needle[index])
 		{
-			if (needle[ch] == haystack[index])
-			{
-				return (&haystack[index]);
-			}
+			do {
+				if (needle[index + 1] == '\0')
+				{
+					return (haystack);
+				}
+
+					index++;
+
+			} while (haystack[index] == needle[index]);
 		}
+
+		haystack++;
 	}
 
 	return ('\0');

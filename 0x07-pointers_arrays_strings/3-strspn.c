@@ -9,7 +9,9 @@
 
 unsigned int _strspn(char *s, char *accept)
 {
-	int len = 0, index = 0;
+	int index = 0, len = 0;
+	unsigned int result = 0;
+
 	char *p = s;
 
 	while (*p++ != '\0')
@@ -17,21 +19,23 @@ unsigned int _strspn(char *s, char *accept)
 
 	len = p - s;
 
-	if (*s == *accept)
+	while (*s)
 	{
-		return (index);
-	}
-	else
-	{
-		while (index < len)
+		for (index = 0; index < len; index++)
 		{
-			if (s[index] == *accept)
+			if (*s == accept[index])
 			{
+				result++;
 				break;
 			}
-			index++;
+			else if (accept[index + 1] == '\0')
+			{
+				return (result);
+			}
 		}
+
+		s++;
 	}
 
-	return (++index);
+	return (result);
 }

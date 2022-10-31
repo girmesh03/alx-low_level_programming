@@ -9,19 +9,12 @@
 
 unsigned int _strspn(char *s, char *accept)
 {
-	int index = 0, len = 0;
+	int index = 0;
 	unsigned int result = 0;
-
-	char *p = s;
-
-	while (*p++ != '\0')
-		;
-
-	len = p - s;
 
 	while (*s)
 	{
-		for (index = 0; index < len; index++)
+		for (index = 0; accept[index]; index++)
 		{
 			if (*s == accept[index])
 			{

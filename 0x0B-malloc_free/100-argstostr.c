@@ -10,11 +10,13 @@
 
 char *argstostr(int ac, char **av)
 {
-	int index = 0, counter = 0, value, multiplier, i = 0;
+	int index = 0, counter, value, multiplier;
 	char *string;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
+
+	multiplier = ac;
 
 	for (counter = 0; counter < ac; counter++)
 	{

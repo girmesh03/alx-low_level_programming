@@ -10,7 +10,7 @@
 
 char *argstostr(int ac, char **av)
 {
-	int index = 0, counter = 0, value, multiplier;
+	int index = 0, counter = 0, value, multiplier, i = 0;
 	char *string;
 
 	if (ac == 0 || av == NULL)
@@ -22,20 +22,17 @@ char *argstostr(int ac, char **av)
 			multiplier++;
 	}
 
-	string = malloc((multiplier) * sizeof(char));
+	string = malloc((multiplier + 1) * sizeof(char));
 
 	if (string == NULL)
 		return (NULL);
 
-	counter = 0;
-
-	while (counter < ac)
+	for (counter = 0; counter < ac; counter++)
 	{
 		for (value = 0; av[counter][value]; value++)
 			string[index++] = av[counter][value];
 
 		string[index++] = '\n';
-		counter++;
 	}
 
 	string[multiplier] = '\0';

@@ -5,65 +5,64 @@ int word_l(char *str);
 int count_w(char *str);
 
 /**
- * strtow - splits a string into words
- * @str: a string into words
- * Return: array of strings(words)
- */
+* strtow - splits a string into words
+* @str: a string into words
+* Return: array of strings(words)
+*/
 
 char **strtow(char *str)
 {
-	int index_i = 0, index_j = 0, index_k = 0, index_h = 0, size = 0, len = 0;
-	char **words;
+int index_i = 0, index_j = 0, index_k = 0, index_h = 0, size = 0, len = 0;
+char **words;
 
-	if (str == NULL || str[0] == '\0')
-		return (NULL);
+if (str == NULL || str[0] == '\0')
+return (NULL);
 
-	size = count_w(str);
+size = count_w(str);
 
-	if (size == 0)
-		return (NULL);
+if (size == 0)
+return (NULL);
 
-	words = malloc((size + 1) * sizeof(char *));
+words = malloc((size + 1) * sizeof(char *));
 
-	if (words == NULL)
-		return (NULL);
+if (words == NULL)
+return (NULL);
 
-	while (str[index_i] != '\0')
-	{
-		while (str[index_i] == ' ' && str[index_i] != '\0')
-			index_i++;
+while (str[index_i] != '\0')
+{
+while (str[index_i] == ' ' && str[index_i] != '\0')
+index_i++;
 
-		if (str[index_i] == '\0')
-		{
-			words[index_j] = NULL;
-			return (words);
-		}
+if (str[index_i] == '\0')
+{
+words[index_j] = NULL;
+return (words);
+}
 
-		words[index_j] = malloc(sizeof(char) * word_l(str + index_i) + 1);
+words[index_j] = malloc(sizeof(char) * word_l(str + index_i) + 1);
 
-		if (words[index_j] == NULL)
-		{
-			for (index_k = index_j - 1; index_k >= 0; index_k--)
-				free(words[index_k]);
+if (words[index_j] == NULL)
+{
+for (index_k = index_j - 1; index_k >= 0; index_k--)
+free(words[index_k]);
 
-			free(words);
+free(words);
 
-			return (NULL);
-		}
+return (NULL);
+}
 
-		len = word_l(str + index_i);
+len = word_l(str + index_i);
 
-		for (index_h = 0; index_h < len && str[index_i] != '\0'; index_h++,
-			index_i++)
-				words[index_j][index_h] = str[index_i];
+for (index_h = 0; index_h < len && str[index_i] != '\0'; index_h++, index_i++)
+words[index_j][index_h] = str[index_i];
 
-		words[index_j][index_h] = '\0';
-		index_j++;
-	}
+words[index_j][index_h] = '\0';
+index_j++;
+}
 
-	words[index_j] = NULL;
+words[index_j] = NULL;
 
-	return (words);
+return (words);
 }
 
 

@@ -38,18 +38,18 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		return (new_block);
 	}
 
-	new_block = malloc(sizeof((char *)(ptr)) * new_size);
-
-	if (new_block == NULL)
+	if (new_size > old_size && (ptr != NULL))
 	{
+		new_block = malloc(new_size);
+
+		if (new_block == NULL)
+			return (new_block);
+
+		for (index = 0; index < old_size; index++)
+			new_block[index] = *((char *)ptr + 1);
+
 		free(ptr);
-		return (NULL);
 	}
 
-	for (index = 0; index < old_size && index < new_size; index++)
-		new_block[index] = *((char *)ptr + index);
-
-	free(ptr);
 	return (new_block);
 }
-

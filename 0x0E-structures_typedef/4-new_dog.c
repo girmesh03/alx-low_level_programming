@@ -1,29 +1,28 @@
 #include <stdlib.h>
 #include "dog.h"
 
+int get_string_len(char *string);
+char *copy(char *s1, char *s2);
+
 /**
  * get_string_len - Gets the length of a string.
  * @string: A string length to be calculated.
  * Return: Length of a string
  */
-
 int get_string_len(char *string)
 {
 	int length = 0, index;
 
 	for (index = 0; string[index] != '\0'; index++)
 		length++;
-
 	return (length);
 }
-
 /**
  * copy - Copy a string source to destination.
  * @s1: Destination.
  * @s2: Source.
  * Return: A new string.
  */
-
 char *copy(char *s1, char *s2)
 {
 	int index;
@@ -32,10 +31,8 @@ char *copy(char *s1, char *s2)
 		s1[index] = s2[index];
 
 	s1[index] = '\0';
-
 	return (s1);
 }
-
 /**
  * new_dog - Creates a new user defined object.
  * @name: Member to hold name
@@ -43,7 +40,6 @@ char *copy(char *s1, char *s2)
  * @owner: Member to hold owner
  * Return: A new object.
  */
-
 dog_t *new_dog(char *name, float age, char *owner)
 {
 	dog_t *mydog;

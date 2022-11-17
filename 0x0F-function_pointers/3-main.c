@@ -11,7 +11,7 @@
 *
 */
 
-int main(int argc, char *argv[])
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
 	int first_number;
 	int second_number;
@@ -27,20 +27,20 @@ int main(int argc, char *argv[])
 	select = argv[2];
 	second_number = atoi(argv[3]);
 
-	if (get_op_func(argv[2]) == NULL)
+	if (get_op_func(select) == NULL || select[1] != '\0')
 	{
 		printf("Error\n");
 		exit(99);
 	}
 
-	if ((*select == '/' && second_number == 0) ||
-			(*select == '%' && second_number == 0))
+	if ((*select == '/' && second_number == 0)
+			|| (*select == '%' && second_number == 0))
 	{
 		printf("Error\n");
 		exit(100);
 	}
 
-	printf("%d\n", get_op_func(argv[2])(first_number, second_number));
+	printf("%d\n", get_op_func(select)(first_number, second_number));
 
 	return (0);
 }

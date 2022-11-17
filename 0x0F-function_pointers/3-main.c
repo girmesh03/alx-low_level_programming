@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include "3-calc.h"
 #include <stdlib.h>
@@ -12,23 +13,27 @@
 
 int main(int argc, char *argv[])
 {
-	int first_number;
-	int second_number;
-	int result;
+	char *select_operator = argv[2];
 
-	if (argc == 4)
-	{
-		first_number = atoi(argv[1]);
-		second_number = atoi(argv[3]);
-		result = get_op_func(argv[2])(first_number, second_number);
-
-		printf("%d\n", result);
-
-		return (0);
-	}
-	else
+	if (argc != 4)
 	{
 		printf("Error\n");
-		return (98);
+		exit(98);
 	}
+	else if (get_op_func(select_operator) == NULL
+			|| select_operator[1] != '\0')
+	{
+		printf("Error\n");
+		exit(99);
+	}
+	else if ((select_operator[2] == '/' && atoi(argv[3]) == 0) ||
+			(select_operator[2] == '%' && atoi(argv[3]) == 0))
+	{
+		printf("Error\n");
+		exit(100);
+	}
+
+	printf("%d\n", get_op_func(argv[2])(atoi(argv[1]), atoi(argv[3])));
+
+	return (0);
 }

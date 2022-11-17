@@ -8,7 +8,7 @@
  * Return: 0 on success or 98 on error.
  *
  */
-int main(int __attribute__((__unused__)) argc, char **argv)
+int main(int argc, char **argv)
 {
 	int first_number = atoi(argv[1]);
 	int second_number = atoi(argv[3]);
@@ -21,8 +21,7 @@ int main(int __attribute__((__unused__)) argc, char **argv)
 		printf("Error\n");
 		exit(98);
 	}
-	else if (get_op_func(select_operator) == NULL
-			|| select_operator[1] != '\0')
+	else if (get_op_func(select_operator) == NULL)
 	{
 		printf("Error\n");
 		exit(99);

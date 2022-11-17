@@ -8,7 +8,7 @@
  * Return: 0 on success or 98 on error.
  *
  */
-int main(int argc, char *argv[])
+int main(int __attribute__((__unused__)) argc, char **argv)
 {
 	int first_number = atoi(argv[1]);
 	int second_number = atoi(argv[3]);

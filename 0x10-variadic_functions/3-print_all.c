@@ -3,10 +3,10 @@
 #include <stdio.h>
 
 /**
-* print_all - Prints anything.
-* @format: List of types of arguments passed to the function.
-* ...: Arguments passed to the function.
-* Return: void.
+ * print_all - Prints anything.
+ * @format: List of types of arguments passed to the function.
+ * ...: Arguments passed to the function.
+ * Return: void.
 */
 
 void print_all(const char * const format, ...)
@@ -17,7 +17,7 @@ void print_all(const char * const format, ...)
 
 	va_start(args, format);
 
-	while (format[i] != '\0')
+	while (format && format[i])
 	{
 		switch (format[i])
 		{
@@ -32,18 +32,15 @@ void print_all(const char * const format, ...)
 			break;
 		case 's':
 			str = va_arg(args, char *);
-
 			if (str == NULL)
-			{
-				printf("(nil)");
-				break;
-			}
+				str = "(nil)";
 			printf("%s", str);
 			break;
+		default:
+			i++;
+			continue;
 		}
-		if ((format[i] == 'c' || format[i] == 'i' ||
-				format[i] == 'f' || format[i] == 's')
-				&& format[i + 1] != '\0')
+		if (format[i + 1])
 			printf(", ");
 		i++;
 	}
@@ -51,3 +48,4 @@ void print_all(const char * const format, ...)
 	printf("\n");
 	va_end(args);
 }
+

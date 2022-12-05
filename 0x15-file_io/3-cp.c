@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 char *create_buffer(char *file);
 void close_file(int fd);
@@ -25,66 +26,55 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 	exit(97);
 
-	from = open(argv[1], O_RDONLY);
-	if (from == -1)
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-	exit(98);
-
 	buffer = create_buffer(argv[1]);
-	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (to == -1)
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-	exit(99);
-
+	from = open(argv[1], O_RDONLY);
 	read_from = read(from, buffer, 1024);
-	if (read_from == -1)
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-	exit(98);
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
-	write_to = write(to, buffer, read_from);
-	if (write_to == -1)
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-	exit(99);
+	do {
+		if (from == -1 || read_from == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+			free(buffer);
+			exit(98);
+		}
 
-	close_file(from);
-	close_file(to);
+		write_to = write(to, buffer, read_from);
+		if (to == -1 || write_to == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			free(buffer);
+			exit(99);
+		}
+
+		read_from = read(from, buffer, 1024);
+		to = open(argv[2], O_WRONLY | O_APPEND);
+
+	} while (read_from > 0);
 
 	free(buffer);
+	close_file(from);
+	close_file(to);
 
 	return (0);
 }
 
 /**
- * create_buffer - Creates a buffer to hold the contents of a file.
- * @file: The name of the file to read.
+ * create_buffer - Allocates 1024 bytes for a buffer.
+ * @file: The name of the file buffer is storing chars for.
  *
- * Return: A pointer to the buffer.
- *
- * Description: If the file cannot be opened or read - exit code 98.
- *              If the file cannot be closed - exit code 100.
+ * Return: A pointer to the newly-allocated buffer.
  */
-
 char *create_buffer(char *file)
 {
-	int fd, read_file;
 	char *buffer;
 
 	buffer = malloc(sizeof(char) * 1024);
 	if (buffer == NULL)
+	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
-	exit(99);
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file);
-	exit(98);
-
-	read_file = read(fd, buffer, 1024);
-	if (read_file == -1)
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file);
-	exit(98);
-
-	close_file(fd);
+		exit(99);
+	}
 
 	return (buffer);
 }
@@ -92,16 +82,13 @@ char *create_buffer(char *file)
 /**
  * close_file - Closes a file descriptor.
  * @fd: The file descriptor to close.
- *
- * Description: If the file cannot be closed - exit code 100.
  */
-
 void close_file(int fd)
 {
-	int close_file;
+	int closed;
 
-	close_file = close(fd);
-	if (close_file == -1)
+	closed = close(fd);
+	if (closed == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);

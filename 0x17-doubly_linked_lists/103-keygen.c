@@ -3,44 +3,35 @@
 #include <string.h>
 
 /**
- * main - Generates and prints passwords for the crackme5 executable.
- * @argc: The number of arguments supplied to the program.
- * @argv: An array of pointers to the arguments.
- * Return: 0 if successful, 1 otherwise.
+ * main - generates a keygen for 103-keygenme
+ * @argc: number of arguments
+ * @argv: array of arguments
+ *
+ * Return: 0 on success, 1 on error
  */
 
-int main(int argc, char *argv[])
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
-	int i, len, sum;
-	char password[7];
+	int i, sum, len;
+	char *key;
 
-	if (argc != 2)
+	if (argv[1] == NULL)
 	{
-		printf("Usage: %s key\n", argv[0]);
+		printf("Usage: %s <key>\n", argv[0]);
 		return (1);
 	}
-
 	len = strlen(argv[1]);
-	if (len != 5)
-	{
-		printf("Key must be 5 characters\n");
+	key = malloc(sizeof(char) * (len + 1));
+	if (key == NULL)
 		return (1);
-	}
-
-	sum = 0;
-	for (i = 0; i < len; i++)
+	for (i = 0, sum = 0; i < len; i++)
 	{
-		sum += argv[1][i];
+		key[i] = argv[1][i] ^ 59;
+		sum += key[i];
 	}
-
-	srand(sum ^ 14);
-	for (i = 0; i < 5; i++)
-	{
-		password[i] = rand() ^ argv[1][i];
-	}
-
-	password[i] = '\0';
-	printf("%s\n", password);
-
+	key[i] = (sum % 128) ^ 79;
+	key[i + 1] = '\0';
+	printf("%s", key);
+	free(key);
 	return (0);
 }

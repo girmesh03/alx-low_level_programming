@@ -1,5 +1,4 @@
 #include "lists.h"
-
 /**
  * delete_dnodeint_at_index - deletes the node at index index of a
  * dlistint_t linked list
@@ -9,41 +8,43 @@
  */
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-	/* declare temp pointer and set to head */
-	dlistint_t *tmp = *head;
-	/* if head is NULL, return -1 */
-	if (*head == NULL)
+	/* let current point to the head of the list */
+	dlistint_t *current = *head;
+	/* a variable to keep track of the index */
+	unsigned int counter = 0;
+	/* if the list is empty, return -1 */
+	if (current == NULL)
 		return (-1);
-	/* traverse list until index is 0 */
-	for (; index > 0; index--)
+	/* if the index is 0, delete the head node */
+	if (index == 0)
 	{
-		/* if tmp is NULL, return -1 */
-		if (tmp == NULL)
+		/* let current point to the next node */
+		*head = current->next;
+		/* if the list has more than one node */
+		if (current->next != NULL)
+			/* let the previous node of the next node point to NULL */
+			current->next->prev = NULL;
+		/* free the memory of the head node */
+		free(current);
+		/* return 1 */
+		return (1);
+	}
+	/* loop through the list until the index is reached */
+	while (counter < index)
+	{
+		/* if the index is greater than the number of nodes */
+		if (current == NULL)
+			/* return -1 */
 			return (-1);
-		/* tmp points to next node */
-		tmp = tmp->next;
+		/* update current to point to the next node */
+		current = current->next;
+		/* increment the counter */
+		counter++;
 	}
-	/* if tmp is head, set head to tmp->next */
-	if (tmp == *head)
-	{
-		/* if tmp->next is NULL, set head to NULL */
-		*head = tmp->next;
-		/* if tmp->next is not NULL, set tmp->next->prev to NULL */
-		if (tmp->next != NULL)
-			/* set tmp->next->prev to NULL */
-			tmp->next->prev = NULL;
-	}
-	else
-	{
-		/* if tmp->next is NULL, set tmp->prev->next to NULL */
-		tmp->prev->next = tmp->next;
-		/* if tmp->next is not NULL, set tmp->next->prev to tmp->prev */
-		if (tmp->next != NULL)
-			/* set tmp->next->prev to tmp->prev */
-			tmp->next->prev = tmp->prev;
-	}
-	/* free tmp */
-	free(tmp);
-	/* return 1 */
+	/* now delete the node at the index */
+	current->prev->next = current->next;
+	if (current->next != NULL)
+		current->next->prev = current->prev;
+	free(current);
 	return (1);
 }

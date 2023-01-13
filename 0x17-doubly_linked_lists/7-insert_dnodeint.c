@@ -13,44 +13,35 @@
 
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	/* declare temp pointer and set to head */
-	/* declare new_node pointer */
-	dlistint_t *tmp = *h, *new_node;
+	dlistint_t *new_node;
+	dlistint_t *current;
+	unsigned int counter = 0;
 
-	/* if idx is 0, call add_dnodeint */
 	if (idx == 0)
 		return (add_dnodeint(h, n));
 
-	/* traverse list until idx is not equal to 1 */
-	for (; idx != 1; idx--)
+	if (idx == 1)
+		return (add_dnodeint(h, n));
+
+	current = *h;
+
+	while (counter < idx - 1)
 	{
-		/* if tmp is NULL, return NULL */
-		tmp = tmp->next;
-		if (tmp == NULL)
+		if (current == NULL)
 			return (NULL);
+		current = current->next;
+		counter++;
 	}
 
-	/* if tmp->next is NULL, call add_dnodeint_end */
-	if (tmp->next == NULL)
-		return (add_dnodeint_end(h, n));
-
-	/* allocate memory for new_node */
 	new_node = malloc(sizeof(dlistint_t));
-	/* if malloc fails, return NULL */
 	if (new_node == NULL)
 		return (NULL);
 
-	/* set new_node->n to n */
 	new_node->n = n;
-	/* set new_node->next to tmp->next */
-	new_node->next = tmp->next;
-	/* set new_node->prev to tmp */
-	new_node->prev = tmp;
-	/* set tmp->next->prev to new_node */
-	tmp->next->prev = new_node;
-	/* set tmp->next to new_node */
-	tmp->next = new_node;
+	new_node->prev = current;
+	new_node->next = current->next;
+	current->next = new_node;
+	new_node->next->prev = new_node;
 
-	/* return new_node */
 	return (new_node);
 }

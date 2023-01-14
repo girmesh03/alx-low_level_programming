@@ -9,22 +9,23 @@
 
 int sum_dlistint(dlistint_t *head)
 {
-	/* declare sum variable */
+	/* let's declare temp pointer to head */
+	dlistint_t *temp = head;
+
+	/* let's declare a variable to store the sum */
 	int sum = 0;
 
-	/* if head is NULL, return 0 */
-	if (head == NULL)
+	/* let's check if the list is empty, if so return 0 */
+	if (temp == NULL)
 		return (0);
 
-	/* traverse list until head is NULL */
-	while (head != NULL)
+	/* let's traverse the list and add the data to sum */
+	while (temp != NULL)
 	{
-		/* add n to sum */
-		sum += head->n;
-		/* head points to next node */
-		head = head->next;
+		sum += temp->n;
+		temp = temp->next;
 	}
 
-	/* return sum */
+	/* let's return the sum */
 	return (sum);
 }

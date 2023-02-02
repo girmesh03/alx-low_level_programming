@@ -21,7 +21,8 @@ hash_table_t *hash_table_create(unsigned long int size)
 	new_table->size = size;
 	/* allocate memory for the array of the new hash table */
 	/* if calloc fails, free the memory allocated for the new hash table */
-	new_table->array = calloc(size, sizeof(hash_node_t *));
+	/* new_table->array = calloc(size, sizeof(hash_node_t *)); */
+	new_table->array = malloc(size * sizeof(hash_node_t *));
 	if (new_table->array == NULL)
 	{
 		free(new_table);

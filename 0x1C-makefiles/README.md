@@ -6,8 +6,8 @@ A Makefile is a script that automates the process of building a program from sou
 ## Basic Syntax
 A Makefile consists of rules and dependencies. The basic syntax of a rule is as follows:
 
-```.PHONY: clean
-
+```
+.PHONY: clean
 clean:
     rm *.o
 ```

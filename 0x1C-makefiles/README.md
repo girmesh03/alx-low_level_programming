@@ -10,9 +10,9 @@ target: dependencies
     command
 ```
 
-target: The name of the file that the rule will create, typically an executable program.
-dependencies: The names of the files that the target depends on, typically source code files.
-command: The command that will be executed to create the target file, typically a compiler command.
+- `target:` The name of the file that the rule will create, typically an executable program.
+- `dependencies`: The names of the files that the target depends on, typically source code files.
+- `command:` The command that will be executed to create the target file, typically a compiler command.
 
 For example, a simple Makefile for a program called hello that consists of two source files main.c and hello.c might look like this:
 

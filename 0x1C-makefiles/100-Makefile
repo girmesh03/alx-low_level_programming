@@ -1,0 +1,36 @@
+# define variables
+CC		= gcc
+CFLAGS	= -Wall -Werror -Wextra -pedantic
+RM		= rm -f
+NAME	= school
+SRC		= $(wildcard *.c)
+OBJ		= $(SRC:.c=.o)
+
+# define rules
+.PHONY: all clean fclean oclean re
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+clean:
+	$(RM) $(OBJ)
+	$(RM) *~
+	$(RM) \#*\#
+	$(RM) *.swp
+
+fclean: clean
+	$(RM) $(NAME)
+
+oclean: clean
+	$(RM) $(OBJ)
+
+re: fclean all
+
+# compile the object files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# ensure that the header file m.h is present
+$(OBJ): m.h

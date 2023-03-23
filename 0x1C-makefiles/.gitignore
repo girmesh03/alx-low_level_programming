@@ -3,3 +3,4 @@ main.c
 school.c
 school
 5-main.py
+*.o
